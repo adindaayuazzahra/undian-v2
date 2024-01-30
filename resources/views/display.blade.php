@@ -79,14 +79,6 @@
             } else {
                 $('#gambarHadiah').html('Foto tidak tersedia.');
             }
-            // $('#pemenangName').append('<p>' + peserta.nama + '</p>');
-            // Bersihkan dan isi pemenangName dengan nama peserta
-            // $('#pemenangName').empty();
-
-            // // Tampilkan semua nama peserta tanpa animasi
-            // $.each(response.pesertaDaftar, function (index, peserta) {
-            //     $('#pemenangName').append('<p>' + peserta.nama + '</p>');
-            // });
 
             var namaArray = response.pesertaDaftar;
             var orderedList = $('<ol>'); // Membuat elemen <ol> baru
