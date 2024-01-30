@@ -199,13 +199,22 @@ class HomeController extends Controller
     {
         $hadiah = Hadiah::find($id);
         if ($hadiah) {
+
+
+            // Hapus entri hadiah dari database
+            $peserta = Peserta::where('id_hadiah', $id)->get();
+            foreach ($peserta as $p) {
+                $p->status = 1;
+                $p->id_hadiah = NULL;
+                $p->save();
+            }
+
             // Hapus gambar terkait dari sistem file
             $pathToImage = public_path('foto') . '/' . $hadiah->foto;
             if (File::exists($pathToImage)) {
                 File::delete($pathToImage);
             }
 
-            // Hapus entri hadiah dari database
             $hadiah->delete();
 
             return redirect()->route('admin.list_hadiah')->with('success', 'Hadiah berhasil dihapus');
@@ -223,11 +232,15 @@ class HomeController extends Controller
     {
         $count = Peserta::where('id_hadiah', $request->id)->count();
         $jumlahHadiah = Hadiah::find($request->id)->jumlah;
-        if ($jumlahHadiah == $count) {
+
+        // Ngecek sisa
+        $sisa = $jumlahHadiah - $count;
+
+        if ($jumlahHadiah == $count && $sisa == 0) {
             return response()->json(['error' => 'Kuota hadiah sudah habis. Tidak dapat mengundi lagi.']);
         } else {
             $pesertaAcak = Peserta::where('status', 1)
-                ->whereNull('id_hadiah')->inRandomOrder()->limit($jumlahHadiah)->get();
+                ->whereNull('id_hadiah')->inRandomOrder()->limit($sisa)->get();
             return response()->json(['peserta' => $pesertaAcak]);
         }
         // Ambil nama peserta secara acak sebanyak jumlah hadiah
