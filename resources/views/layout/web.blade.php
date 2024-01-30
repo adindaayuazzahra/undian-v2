@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>JMTM - BULAN K3</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/logojmtm.ico') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -21,7 +22,7 @@
 
 </head>
 
-<body class="" style="background-color: #FFB200;">
+<body style="background-color: #FFB200;">
     @yield('navbar')
     <div style="height: 100vh;" class="d-flex align-items-center justify-content-center">
         @yield('content')

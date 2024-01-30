@@ -20,10 +20,6 @@
                 </div>
             </div>
             <div id="hasil-generate"></div>
-            {{-- <div id="tombol-lock" style="display: none;">
-                <button id="btn-lock">Lock Pemenang</button>
-            </div> --}}
-
         </div>
     </div>
 </div>
@@ -85,7 +81,7 @@
                             $('#hasil-generate').append(table);
                         } else {
                             // Tampilkan pesan jika tidak ada pesertaAcak
-                            $('#hasil-generate').append('<p>Tidak ada peserta yang dihasilkan.</p>');
+                            $('#hasil-generate').append('<p>Semua Peserta Sudah Mendapat Doorprize</p>');
                         }
                     
 
@@ -130,10 +126,10 @@
                     // Menampilkan pesan sukses atau melakukan tindakan lainnya
                     alert(response.message);
                 },
-                error: function(xhr, status, error) {
+                error: function(error) {
                     // Tangani kesalahan jika terjadi
-                    var errorMessage = xhr.responseText;
-                    alert('Terjadi kesalahan saat melakukan locking pemenang: ' + errorMessage);
+                    // var errorMessage = xhr.responseText;
+                    alert('Terjadi kesalahan saat melakukan locking pemenang');
                 }
             });
         });

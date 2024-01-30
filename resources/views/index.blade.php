@@ -68,7 +68,7 @@
                     <label for="floatingInput">NPP</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="passcode" name="passcode" required autocomplete="pff">
+                    <input type="text" class="form-control" id="passcode" name="passcode" required autocomplete="off">
                     <label for="floatingInput">passcode</label>
                 </div>
 

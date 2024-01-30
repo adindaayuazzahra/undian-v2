@@ -1,37 +1,100 @@
 @extends('layout.web')
+@section('cssPage')
+<style>
+    .ex1 {
+        /* background-color: lightblue; */
+        height: 400px;
+        overflow: auto;
+    }
+</style>
+@endsection
 @section('navbar')
-@include('partials.navbar');
+@include('partials.navbar')
 @endsection
 @section('content')
-<div class="container bg-success d-flex flex-column justify-content-center align-items-center">
-    <div class="col">
-        <div class="row">
-            <h1>PEMENANG DOORPRIZE BULAN K3 PT JMTM</h1>
-        </div>
-        <p id="hadiahName"></p>
-        <h1>Pemenang:</h1>
-        <p id="pemenangName"></p>
+<div class="container p-0 m-0 ">
+    <div class="container rounded-pill p-2 mb-3" style="background-color: #ffff">
+        <h1 class="text-center fw-bold"><img class="me-2" src="{{asset('img/confetti.png')}}" height="40px"> PEMENANG
+            DOORPRIZE
+            BULAN K3 PT JMTM <img class="ms-2" src="{{asset('img/confetti.png')}}" height="40px"
+                style="transform: scaleX(-1);"></h1>
     </div>
-</div>
-@endsection
-@section('jsPage')
-<script>
-    // Fungsi untuk memperbarui tampilan berdasarkan data dari server
+    {{-- <h1 class="text-center mb-4 fw-bold"><i class="fa-solid fa-gifts" style="color: #FFF4CF"></i> PEMENANG
+        DOORPRIZE
+        BULAN K3 PT JMTM <i class="fa-solid fa-gifts" style="color: #FFF4CF"></i></h1> --}}
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card shadow-lg h-100" style="border-radius:20px;">
+                <div class="card-body">
+                    <div class="d-flex justify-content-center align-items-center rounded-pill border-none"
+                        style="background-color:#277BC0;padding:10px;">
+                        {{-- <h4 id="nilaiPilihan" class="font-weight-bold text-center"></h4> --}}
+                        <h4 class="text-light" id="hadiahName">Hadiah</h4>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="height:400px;">
+                        {{-- <h4 id="nilaiPilihan" class="font-weight-bold text-center"></h4> --}}
+                        {{-- <h4 class="text-light" id="hadiahName">Hadiah</h4> --}}
+                        <div class="col text-center mt-5  p-1" id="gambarHadiah"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <div class="card shadow-lg h-100" style="border-radius:20px;">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center align-items-center rounded-pill border-none"
+                            style="background-color:#277BC0;padding:10px;border-radius:30px;border:none;">
+                            {{-- <h4 id="nilaiPilihan" class="font-weight-bold text-center"></h4> --}}
+                            <h4 class="text-light">List Pemenang</h4>
+                        </div>
+                        <div class="mt-4 px-2 d-flex justify-content-start align-items-start p-0">
+                            <div class="text-center">
+                                {{-- <div id="myDIV"> --}}
+                                    {{-- <div class=>Lorem ipsum dolor sit amet, consectetutpat.</div> --}}
+                                    <h3 id="pemenangName" class="ex1 text-start" style="font-size: 18pt;"></h3>
+                                    {{--
+                                </div> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    @endsection
+    @section('jsPage')
+    <script>
+        // Fungsi untuk memperbarui tampilan berdasarkan data dari server
         function updateDisplay(response) {
             // Set hadiahName ke teks pesertaDaftar
             $('#hadiahName').empty();
-            $('#hadiahName').append('<p>' + response.namaHadiah + '</p>');
+            $('#hadiahName').text(response.hadiah.nama_hadiah);
+
+            if (response.hadiah.foto) {
+                var fotoUrl = response.hadiah.foto;
+                $('#gambarHadiah').html('<img src="/foto/' + fotoUrl + '" width="300px" alt="Foto Hadiah">');
+            } else {
+                $('#gambarHadiah').html('Foto tidak tersedia.');
+            }
+            // $('#pemenangName').append('<p>' + peserta.nama + '</p>');
             // Bersihkan dan isi pemenangName dengan nama peserta
-            $('#pemenangName').empty();
+            // $('#pemenangName').empty();
+
+            // // Tampilkan semua nama peserta tanpa animasi
             // $.each(response.pesertaDaftar, function (index, peserta) {
             //     $('#pemenangName').append('<p>' + peserta.nama + '</p>');
             // });
-            $.each(response.pesertaDaftar, function (index, peserta) {
-        var $namaPeserta = $('<p style="display: none;">' + peserta.nama + '</p>');
-        $('#pemenangName').append($namaPeserta);
-        $namaPeserta.fadeIn(1000 * (index + 1)); // Animasi muncul dengan durasi 1 detik per peserta
-    });
 
+            var namaArray = response.pesertaDaftar;
+            var orderedList = $('<ol>'); // Membuat elemen <ol> baru
+            $.each(namaArray, function(index, element) {
+                var listItem = $('<li>').text(element.nama);
+                orderedList.append(listItem);
+            });
+            $('#pemenangName').empty().append(orderedList);
         }
 
         // Fungsi untuk melakukan polling setiap detik
@@ -57,5 +120,5 @@
         $(document).ready(function () {
             pollForUpdates();
         });
-</script>
-@endsection
+    </script>
+    @endsection

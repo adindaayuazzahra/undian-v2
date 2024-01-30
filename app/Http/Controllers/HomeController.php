@@ -148,7 +148,7 @@ class HomeController extends Controller
         $namaGambar = time() . '_' . $gambar->getClientOriginalName();
         $gambar->move(public_path('foto'), $namaGambar);
 
-        $hadiah->nama_hadiah = $request->nama_hadiah;
+        $hadiah->nama_hadiah = strtoupper($request->nama_hadiah);
         $hadiah->foto = $namaGambar;
         $hadiah->jumlah = $request->jumlah;
         $hadiah->save();
@@ -305,9 +305,9 @@ class HomeController extends Controller
         $pesertaDaftar = Peserta::where('id_hadiah', $idHadiah->id_hadiah)->get();
 
         $hadiah = Hadiah::where('id', $idHadiah->id)->first();
-        $namaHadiah = $hadiah->nama_hadiah;
+        // $namaHadiah = $hadiah->nama_hadiah;
         // Lakukan operasi lain sesuai kebutuhan
         // Return atau tampilkan hasil sesuai kebutuhan Anda
-        return response()->json(['pesertaDaftar' => $pesertaDaftar, 'message' => 'berhasil display panggung', 'namaHadiah' => $namaHadiah]);
+        return response()->json(['pesertaDaftar' => $pesertaDaftar, 'message' => 'berhasil display panggung', 'hadiah' => $hadiah]);
     }
 }
