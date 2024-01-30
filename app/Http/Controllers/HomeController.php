@@ -85,7 +85,7 @@ class HomeController extends Controller
             'passcode' => 'required'
         ]);
 
-        $peserta = Peserta::where('npp', $request->npp)->where('passcode', $request->passcode)->first();
+        $peserta = Peserta::with('hadiah')->where('npp', $request->npp)->where('passcode', $request->passcode)->first();
         if ($peserta && $peserta->passcode == $request->passcode) {
             return view('qrcode', compact('peserta'));
         } else {
