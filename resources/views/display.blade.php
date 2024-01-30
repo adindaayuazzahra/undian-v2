@@ -14,14 +14,9 @@
 @section('content')
 <div class="container p-0 m-0 ">
     <div class="container rounded-pill p-2 mb-3" style="background-color: #ffff">
-        <h1 class="text-center fw-bold"><img class="me-2" src="{{asset('img/confetti.png')}}" height="40px"> PEMENANG
-            DOORPRIZE
-            BULAN K3 PT JMTM <img class="ms-2" src="{{asset('img/confetti.png')}}" height="40px"
+        <h1 class="text-center fw-bold"><img class="me-2" src="{{asset('img/confetti.png')}}" height="40px"> PEMENANG DOORPRIZE BULAN K3 PT JMTM <img class="ms-2" src="{{asset('img/confetti.png')}}" height="40px"
                 style="transform: scaleX(-1);"></h1>
     </div>
-    {{-- <h1 class="text-center mb-4 fw-bold"><i class="fa-solid fa-gifts" style="color: #FFF4CF"></i> PEMENANG
-        DOORPRIZE
-        BULAN K3 PT JMTM <i class="fa-solid fa-gifts" style="color: #FFF4CF"></i></h1> --}}
     <div class="row">
         <div class="col-md-4">
             <div class="card shadow-lg h-100" style="border-radius:20px;">
