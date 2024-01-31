@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.4.1/css/rowReorder.dataTables.min.css">
     <script src="{{asset('js/html5-qrcode.min.js')}}"></script>
     @yield('cssPage')
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.4/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 
 <body style="background-color: #FFB200;">
@@ -40,6 +41,7 @@
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/rowreorder/1.4.1/js/dataTables.rowReorder.min.js"></script>
     {{-- <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.4/dist/sweetalert2.all.min.js"></script>
     @yield('jsPage')
 </body>
 

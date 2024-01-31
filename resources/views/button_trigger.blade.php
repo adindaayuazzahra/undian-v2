@@ -1,6 +1,12 @@
 @extends('layout.web')
 @section('cssPage')
 <style>
+    @font-face {
+        font-family: 'gameFont';
+        src: url('{{asset("PressStart2P-Regular.ttf")}}') format('woff2');
+    }
+
+
     body {
         /* text-align:center; */
         background-color: #ffcc8e !important;
@@ -46,6 +52,11 @@
         box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
     }
 
+
+    #triggerButton.judul {
+        font-family: 'gameFont', sans-serif;
+    }
+
     .button:after {
         content: "";
         height: 103px;
@@ -73,14 +84,19 @@
 
 <div class="row text-center">
 
+
     <div class="selectbox">
         <span></span>
-        <select class="form-select" aria-label="Default select example" id="hadiahDropdown">
+
+        <select class="form-select btn btn-success" aria-label="Default select example" id="hadiahDropdown">
         </select>
     </div>
+    <audio src="{{asset('sound/rolling.mp3')}}" style="display: none;" id="rolls" type="audio/mpeg"></audio>
+    <audio src="{{asset('sound/congrats.mp3')}}" style="display: none;" id="cong" type="audio/mpeg"></audio>
+    <br>
     <div id="triggerButton" ontouchstart="">
-        <div class="button">
-            <a href="#">LET'S GO</a>
+        <div class="button judul animate__animated animate__bounce animate__delay-2s">
+            <a href="#" id="tombol">LET'S GO</a>
         </div>
     </div>
 </div>
@@ -110,20 +126,27 @@
 
         // Menambahkan event listener untuk tombol trigger
         $('#triggerButton').click(function () {
-            // Mendapatkan nilai hadiah yang dipilih dari dropdown
-            var selectedHadiah = $('#hadiahDropdown').val();
-
-            // Menggunakan Ajax untuk memanggil endpoint di server dengan hadiah yang dipilih
-            $.ajax({
-                url: '/display/' + selectedHadiah,
-                type: 'GET',
-                success: function (data) {
-                    console.log(data.message);
-                },
-                error: function (error) {
-                    console.error('Error:', error);
-                }
-            });
+            // alert('sss')
+            $('#rolls')[0].play();
+            $('#tombol').text("Rolling Prize");
+            setTimeout(() => {
+                 // Mendapatkan nilai hadiah yang dipilih dari dropdown
+                var selectedHadiah = $('#hadiahDropdown').val();
+                // Menggunakan Ajax untuk memanggil endpoint di server dengan hadiah yang dipilih
+                $.ajax({
+                    url: '/display/' + selectedHadiah,
+                    type: 'GET',
+                    success: function (data) {
+                        console.log(data.message);
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
+                $('#cong')[0].play();
+                $('#tombol').text("LET'S GO");
+            }, 5000);
+            
         });
     });
 </script>

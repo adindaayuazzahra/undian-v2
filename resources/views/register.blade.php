@@ -47,6 +47,23 @@
                         <option value="PROCUREMENT" {{ old('unit')=='PROCUREMENT' ? 'selected' : '' }}>PROCUREMENT
                         </option>
                         <option value="AMBD" {{ old('unit')=='AMBD' ? 'selected' : '' }}>AMBD</option>
+                        <option value="Area Nusantara" {{ old('unit')=='Area Nusantara' ? 'selected' : '' }}>Area
+                            Nusantara</option>
+                        <option value="Area JTC" {{ old('unit')=='Area JTC' ? 'selected' : '' }}>Area JTC</option>
+                        <option value="Area JAGORAWI" {{ old('unit')=='Area JAGORAWI' ? 'selected' : '' }}>Area JAGORAWI
+                        </option>
+                        <option value="Area JAPEK" {{ old('unit')=='Area JAPEK' ? 'selected' : '' }}>Area JAPEK</option>
+                        <option value="Area JORR" {{ old('unit')=='Area JORR' ? 'selected' : '' }}>Area JORR</option>
+                        <option value="Area Purbaleunyi" {{ old('unit')=='Area Purbaleunyi' ? 'selected' : '' }}>Area
+                            Purbaleunyi</option>
+                        <option value="Area Palikanci Semarang" {{ old('unit')=='Area Palikanci Semarang' ? 'selected'
+                            : '' }}>Area Palikanci Semarang</option>
+                        <option value="Area Bali Mandara" {{ old('unit')=='Area Bali Mandara' ? 'selected' : '' }}>Area
+                            Bali Mandara</option>
+                        <option value="Area Manado Bitung" {{ old('unit')=='Area Manado Bitung' ? 'selected' : '' }}>
+                            Area Manado Bitung</option>
+                        <option value="Area Balikpapan Samarinda" {{ old('unit')=='Area Balikpapan Samarinda'
+                            ? 'selected' : '' }}>Area Balikpapan Samarinda</option>
                     </select>
                     @error('unit')
                     <div class="invalid-tooltip"> {{ $message }}</div>

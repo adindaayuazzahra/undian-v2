@@ -14,7 +14,8 @@
 @section('content')
 <div class="container p-0 m-0 ">
     <div class="container rounded-pill p-2 mb-3" style="background-color: #ffff">
-        <h1 class="text-center fw-bold"><img class="me-2" src="{{asset('img/confetti.png')}}" height="40px"> PEMENANG DOORPRIZE BULAN K3 PT JMTM <img class="ms-2" src="{{asset('img/confetti.png')}}" height="40px"
+        <h1 class="text-center fw-bold"><img class="me-2" src="{{asset('img/confetti.png')}}" height="40px"> PEMENANG
+            DOORPRIZE BULAN K3 PT JMTM <img class="ms-2" src="{{asset('img/confetti.png')}}" height="40px"
                 style="transform: scaleX(-1);"></h1>
     </div>
     <div class="row">
@@ -64,6 +65,8 @@
     <script>
         // Fungsi untuk memperbarui tampilan berdasarkan data dari server
         function updateDisplay(response) {
+            
+            updateDisplay(response);
             // Set hadiahName ke teks pesertaDaftar
             $('#hadiahName').empty();
             $('#hadiahName').text(response.hadiah.nama_hadiah);
@@ -85,11 +88,24 @@
         }
 
         // Fungsi untuk melakukan polling setiap detik
-        function pollForUpdates() {
+        function pollForUpdates(statusAwal) {
+            var nilai = statusAwal
             $.ajax({
                 url: '{{ route('admin.ambil.display') }}',
                 method: 'GET',
                 success: function (response) {
+                    nilai = response.pesertaDaftar[0].id_hadiah
+                    console.log(statusAwal + '  ----  ' +nilai);
+                    if (nilai != response.pesertaDaftar[0].id_hadiah) {
+                        // alert('Selamat kepada Pemenang');
+                        nilai = response.pesertaDaftar[0].id_hadiah
+                        
+                        // update hadiah..
+                        // updateDisplay(response);
+                    }else{
+
+                    }
+                    // kirim
                     updateDisplay(response);
                     console.log(response.pesertaDaftar);
                 },
@@ -98,14 +114,16 @@
                     
                 },
                 complete: function () {
-                    setTimeout(pollForUpdates, 1000); // Polling setiap detik
+                    setTimeout(pollForUpdates(nilai), 1000); // Polling setiap detik
                 }
             });
         }
 
         // Memulai polling pertama kali
         $(document).ready(function () {
-            pollForUpdates();
+            
+            var statusAwal = 0
+            pollForUpdates(statusAwal);
         });
     </script>
     @endsection
