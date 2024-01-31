@@ -36,7 +36,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/button-gen', [HomeController::class, 'buttonGen'])->name('admin.button.generate');
     Route::get('/display/view', [HomeController::class, 'displayView'])->name('admin.display.view');
     Route::get('/ambil/hadiah', [HomeController::class, 'ambilHadiah'])->name('admin.ambil.hadiah');
-    Route::get('/display/{id}', [HomeController::class, 'display'])->name('admin.display');
+    Route::get('/display/{id}/{status}', [HomeController::class, 'display'])->name('admin.display');
     Route::get('/ambil/display', [HomeController::class, 'ambilDisplay'])->name('admin.ambil.display');
     Route::get('/logout/do', [HomeController::class, 'logoutDo'])->name('logout.do');
 });
