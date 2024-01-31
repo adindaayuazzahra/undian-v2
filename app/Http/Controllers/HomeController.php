@@ -295,7 +295,7 @@ class HomeController extends Controller
         return response()->json(['hadiah' => $hadiahs]);
     }
 
-    public function display($id)
+    public function display($id, $status)
     {
         $existingDisplay = Display::where('status', 1)->first();
 
@@ -305,16 +305,17 @@ class HomeController extends Controller
             $existingDisplay->save();
         }
         $tb_display = Display::where('id_hadiah', $id)->first();
-        $tb_display->status = 1;
+        $tb_display->status = $status;
         $tb_display->save();
         // Panggil fungsi displayPanggung dan teruskan nilai $id
         // $this->ambilDisplay($id);
-        return response()->json(['message' => 'berhasil']);
+        return response()->json(['message' => 'berhasil',]);
     }
+
 
     public function ambilDisplay()
     {
-        $idHadiah = Display::where('status', 1)->first();
+        $idHadiah = Display::where('status', 1)->orWhere('status', 2)->first();
         $pesertaDaftar = Peserta::where('id_hadiah', $idHadiah->id_hadiah)->get();
 
         $hadiah = Hadiah::where('id', $idHadiah->id)->first();

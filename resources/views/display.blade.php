@@ -12,6 +12,40 @@
 @include('partials.navbar')
 @endsection
 @section('content')
+
+
+
+<!-- gagal input-->
+<div class="modal fade dialogbox" id="rollingDoor" data-backdrop="static" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="">
+            <div id="closekocok" style="text-align: right;margin: 5px;">
+                <ion-icon name="close-outline" data-dismiss="modal"></ion-icon>
+            </div>
+            <div class="modal-body" style="font-size: 12px;" id="">
+                <div style="text-align: center;margin-top: 10%;margin-bottom: 5%;" class="">
+                    <img src="https://www.klikponsel.com/wp-content/uploads/2015/09/dp-bbm-sedih-gif.gif" alt="image"
+                        class="" style="width: 150px;">
+                </div>
+                <hr>
+                <p>Sepertinya ada yang belum lengkap kak..</p>
+                <p style="font-weight: 900;
+                  font-size: 10px;
+                  margin-top: 23px;
+                  margin-bottom: 5px;">Pastikan semua lengkap yaa...</p>
+            </div>
+            <div class="modal-footer" style="background-color: rgb(128, 0, 0);" id="">
+                <div class="btn-inline">
+                    <!-- <a class="btn" id="readytoroll" style="font-weight: 900;color: white;">ROLL</a> -->
+                    <a class="btn" style="font-weight: 900;color: white;" data-dismiss="modal">
+                        <ion-icon name="close-circle-outline"></ion-icon> Tutup
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- * end gagal input -->
 <div class="container p-0 m-0 ">
     <div class="container rounded-pill p-2 mb-3" style="background-color: #ffff">
         <h1 class="text-center fw-bold"><img class="me-2" src="{{asset('img/confetti.png')}}" height="40px"> PEMENANG
@@ -65,8 +99,6 @@
     <script>
         // Fungsi untuk memperbarui tampilan berdasarkan data dari server
         function updateDisplay(response) {
-            
-            updateDisplay(response);
             // Set hadiahName ke teks pesertaDaftar
             $('#hadiahName').empty();
             $('#hadiahName').text(response.hadiah.nama_hadiah);
@@ -95,27 +127,43 @@
                 url: '{{ route('admin.ambil.display') }}',
                 method: 'GET',
                 success: function (response) {
-                    nilai = response.pesertaDaftar[0].id_hadiah
-                    console.log(statusAwal + '  ----  ' +nilai);
-                    if (nilai != response.pesertaDaftar[0].id_hadiah) {
-                        // alert('Selamat kepada Pemenang');
-                        nilai = response.pesertaDaftar[0].id_hadiah
-                        
-                        // update hadiah..
-                        // updateDisplay(response);
-                    }else{
+                    // nilai = response.pesertaDaftar[0].id_hadiah
+                    // console.log(statusAwal + '  ----  ' +nilai);
+                    // if (nilai != response.pesertaDaftar[0].id_hadiah) {
+                    //     if (nilai != 0) {
+                            
+                    //     }
+                    // }else{
 
-                    }
+                    // }
+
                     // kirim
                     updateDisplay(response);
-                    console.log(response.pesertaDaftar);
+                    // console.log(response.pesertaDaftar);
                 },
                 error: function (error) {
                     console.error('Error:', error);
                     
                 },
-                complete: function () {
-                    setTimeout(pollForUpdates(nilai), 1000); // Polling setiap detik
+                complete: function (response) {
+                    console.log(response.responseJSON.pesertaDaftar)
+                    
+                    console.log(statusAwal + '  ----  ' +nilai);
+                    
+                    if (nilai != response.responseJSON.pesertaDaftar[0].id_hadiah) {
+                        if (nilai != 0) {
+                            $('#rollingDoor').modal('show');
+                            
+                        }
+                        nilai = response.responseJSON.pesertaDaftar[0].id_hadiah
+                    }else{
+
+                    }
+
+
+
+                    
+                    setTimeout(pollForUpdates(nilai), 2000); // Polling setiap detik
                 }
             });
         }

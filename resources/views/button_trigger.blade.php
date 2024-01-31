@@ -93,7 +93,7 @@
     </div>
     <audio src="{{asset('sound/rolling.mp3')}}" style="display: none;" id="rolls" type="audio/mpeg"></audio>
     <audio src="{{asset('sound/congrats.mp3')}}" style="display: none;" id="cong" type="audio/mpeg"></audio>
-    <br>
+    <br>f
     <div id="triggerButton" ontouchstart="">
         <div class="button judul animate__animated animate__bounce animate__delay-2s">
             <a href="#" id="tombol">LET'S GO</a>
@@ -136,6 +136,9 @@
                 $.ajax({
                     url: '/display/' + selectedHadiah,
                     type: 'GET',
+                    data: {
+                        status: 1
+                    }
                     success: function (data) {
                         console.log(data.message);
                     },
