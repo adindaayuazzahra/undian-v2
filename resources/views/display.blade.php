@@ -74,6 +74,7 @@
             if (response.hadiah.foto) {
                 var fotoUrl = response.hadiah.foto;
                 $('#gambarHadiah').html('<img src="/foto/' + fotoUrl + '" width="300px" alt="Foto Hadiah">');
+                // $('#gambarHadiah').html('<img src="https://event.jmtm.co.id/laravel/public/foto/' + fotoUrl + '" width="300px" alt="Foto Hadiah">');
             } else {
                 $('#gambarHadiah').html('Foto tidak tersedia.');
             }

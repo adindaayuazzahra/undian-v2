@@ -39,6 +39,8 @@
                             <td>{{$h->id}}</td>
                             <td>{{$h->nama_hadiah}}</td>
                             <td><img src="/foto/{{$h->foto}}" width="90px;"></td>
+                            {{-- <td><img src="https://event.jmtm.co.id/laravel/public/foto/{{$h->foto}}" width="90px;">
+                            </td> --}}
                             <td>{{$h->jumlah}}</td>
                             <td>
                                 @if ($h->jumlah - $h->peserta->count())
