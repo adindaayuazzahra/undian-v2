@@ -138,7 +138,7 @@
                     type: 'GET',
                     data: {
                         status: 1
-                    }
+                    },
                     success: function (data) {
                         console.log(data.message);
                     },
